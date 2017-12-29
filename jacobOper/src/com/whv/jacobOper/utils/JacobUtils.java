@@ -9,7 +9,7 @@ import com.jacob.com.Dispatch;
 import com.jacob.com.Variant;
 
 /***
- *
+ *jacob工具类：打印、转换为pdf
  * @author huawei
  *
  * @date 2017/8/15

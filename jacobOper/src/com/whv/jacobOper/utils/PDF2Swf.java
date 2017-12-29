@@ -25,7 +25,7 @@ public class PDF2Swf {
 	private String fileName;
 	private File pdfFile;
 	private File swfFile;
-	private static String contentPath=((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest().getSession().getServletContext().getRealPath("WEB-INF/ext/SWFTools/");
+	private static String contentPath=((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest().getSession().getServletContext().getRealPath(PropOptUtil.getProperties("global.properties", "jacob.swfToolHome"));
 	private static String swfToolHome=contentPath;
 	public PDF2Swf(String fileString) {
 		ini(fileString);

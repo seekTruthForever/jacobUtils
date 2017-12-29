@@ -11,6 +11,8 @@ import java.util.Set;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.whv.jacobOper.utils.PropOptUtil;
+
 public final class LibraryLoader {
 	public static final String JACOB_DLL_PATH = "jacob.dll.path";
 	public static final String JACOB_DLL_NAME = "jacob.dll.name";
@@ -18,7 +20,7 @@ public final class LibraryLoader {
 	public static final String JACOB_DLL_NAME_X64 = "jacob.dll.name.x64";
 	public static final String DLL_NAME_MODIFIER_32_BIT = "x86";
 	public static final String DLL_NAME_MODIFIER_64_BIT = "x64";
-	public static final String PROJ_DLL_PATH = "WEB-INF/ext/dll/";
+	public static final String PROJ_DLL_PATH = PropOptUtil.getProperties("global.properties", "jacob.dllpath");
 
 	public static void loadJacobLibrary() {
 		ResourceBundle resources = null;
