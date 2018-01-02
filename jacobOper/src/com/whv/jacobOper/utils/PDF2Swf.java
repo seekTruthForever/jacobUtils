@@ -25,8 +25,8 @@ public class PDF2Swf {
 	private String fileName;
 	private File pdfFile;
 	private File swfFile;
-	private static String contentPath=((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest().getSession().getServletContext().getRealPath(PropOptUtil.getProperties("global.properties", "jacob.swfToolHome"));
-	private static String swfToolHome=contentPath;
+	private static String contentPath=((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest().getSession().getServletContext().getRealPath("/");
+	private static String swfToolHome=((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest().getSession().getServletContext().getRealPath(PropOptUtil.getProperties("global.properties", "jacob.swfToolHome"));
 	public PDF2Swf(String fileString) {
 		ini(fileString);
 	}
@@ -153,6 +153,9 @@ public class PDF2Swf {
 		  }
 		  
 		  this.outputPath = outputPath;
+		  if(!new File(outputPath).exists()) {
+			  new File(outputPath).mkdirs();
+		  }
 		if (!outputPath.equals("")) {
 			String realName = fileName.substring(fileName.lastIndexOf(File.separator)+1);
 			// realName = getPinYin(realName);

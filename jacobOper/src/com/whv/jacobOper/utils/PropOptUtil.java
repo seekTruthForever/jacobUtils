@@ -2,6 +2,7 @@ package com.whv.jacobOper.utils;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,6 +26,35 @@ public class PropOptUtil {
 		String value = null;
 		InputStream in = PropOptUtil.class.getClassLoader()
 				.getResourceAsStream(filePath);
+		try {
+			properties.load(new InputStreamReader(in,"UTF-8"));
+			value = properties.getProperty(key).trim();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (in != null)
+					in.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return value;
+	}
+	/**
+	 * 从属性文件中获取值
+	 * @param key 属性名称
+	 * @return
+	 */
+	public static String getPropertiesAP(String filePath,String key) {
+		Properties properties = new Properties();
+		String value = null;
+		InputStream in = null;
+		try {
+			in = new FileInputStream(new File(filePath));
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
 		try {
 			properties.load(new InputStreamReader(in,"UTF-8"));
 			value = properties.getProperty(key).trim();

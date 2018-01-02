@@ -6,4 +6,15 @@
             org.springframework.web.context.request.RequestContextListener  
         </listener-class>  
 </listener>  
+<welcome-file-list>
+    <welcome-file>/jsp/test/fptest.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+		<servlet-name>fileManage</servlet-name>
+		<servlet-class>com.whv.jacobOper.action.FileManageAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>fileManage</servlet-name>
+		<url-pattern>/fileManage.so</url-pattern>
+	</servlet-mapping>
 </web-app>
