@@ -52,13 +52,11 @@ public class PropOptUtil {
 		InputStream in = null;
 		try {
 			in = new FileInputStream(new File(filePath));
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		}
-		try {
 			properties.load(new InputStreamReader(in,"UTF-8"));
 			value = properties.getProperty(key).trim();
-		} catch (IOException e) {
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}catch (IOException e) {
 			e.printStackTrace();
 		} finally {
 			try {
