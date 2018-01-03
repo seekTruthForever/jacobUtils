@@ -42,7 +42,8 @@ public class JacobUtils {
 	private void ini(String fileString) {
 		this.fileString = fileString;
 		fileName = fileString.substring(0, fileString.lastIndexOf("."));
-		pdfFileString = new File(fileName + ".pdf").getAbsolutePath();
+		File pdfFile = FileUtil.getRenameFile(fileName.substring(fileName.lastIndexOf(File.separator)+1)+".pdf", fileName + ".pdf");
+		pdfFileString = pdfFile.getAbsolutePath();
 	}
 	/**
 	 * 转化为pdf文件
@@ -81,6 +82,7 @@ public class JacobUtils {
             return -2;//文件不存在
         }
         if (kind.equals("pdf")) {
+        	FileUtil.copy(inputFile, pdfFile);
             return -3;//原文件就是PDF文件
         }
         if (kind.equals("doc")||kind.equals("docx")||kind.equals("txt")) {
@@ -222,13 +224,13 @@ public class JacobUtils {
     public static int ppt2PDF(String inputFile, String pdfFile) {
         try {
             ComThread.InitSTA(true);
-            ActiveXComponent app = new ActiveXComponent("PPT.Application");
+            ActiveXComponent app = new ActiveXComponent("PowerPoint.Application");
 //            app.setProperty("Visible", false);
             System.out.println("开始转化PPT为PDF...");
             long date = new Date().getTime();
             Dispatch ppts = app.getProperty("Presentations").toDispatch();
             Dispatch ppt = Dispatch.call(ppts, "Open", inputFile, true, // ReadOnly
-                //    false, // Untitled指定文件是否有标题
+                    true, // Untitled指定文件是否有标题
                     false// WithWindow指定文件是否可见
             ).toDispatch();
             Dispatch.invoke(ppt, "SaveAs", Dispatch.Method, new Object[]{

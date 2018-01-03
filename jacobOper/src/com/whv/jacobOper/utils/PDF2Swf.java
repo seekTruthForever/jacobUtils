@@ -57,7 +57,6 @@ public class PDF2Swf {
 	/**
 	 * 转换成 swf
 	 */
-	@SuppressWarnings("unused")
 	public void pdf2swf() {
 		Runtime r = Runtime.getRuntime();
 		if (!swfFile.exists()) {
@@ -67,18 +66,15 @@ public class PDF2Swf {
 
 						Process p = r
 								.exec(swfToolHome+File.separator+"pdf2swf.exe"
-										+ " -t "
+										+ " -t \""
 										+ pdfFile.getPath()
-										+ " -s flashversion=9 -o "
-										+ swfFile.getPath()+ " -f");
+										+ "\" -s flashversion=9 -o \""
+										+ swfFile.getPath()+ "\" -f");
 						System.out.print(loadStream(p.getInputStream()));
 						System.err.print(loadStream(p.getErrorStream()));
 						System.out.print(loadStream(p.getInputStream()));
 						System.err.println("****swf转换成功，文件输出："
 								+ swfFile.getPath() + "****");
-						if (pdfFile.exists()) {
-							pdfFile.delete();
-						}
 
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -86,15 +82,12 @@ public class PDF2Swf {
 					}
 				} else if (environment == 2) {// linux环境处理
 					try {
-						Process p = r.exec("pdf2swf " + pdfFile.getPath()
-								+ " -o " + swfFile.getPath() + " -T 9");
+						Process p = r.exec("pdf2swf \"" + pdfFile.getPath()
+								+ "\" -o \"" + swfFile.getPath() + "\" -T 9");
 						System.out.print(loadStream(p.getInputStream()));
 						System.err.print(loadStream(p.getErrorStream()));
 						System.err.println("****swf转换成功，文件输出："
 								+ swfFile.getPath() + "****");
-						if (pdfFile.exists()) {
-							pdfFile.delete();
-						}
 					} catch (Exception e) {
 						e.printStackTrace();
 						

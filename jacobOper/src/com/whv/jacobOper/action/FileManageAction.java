@@ -8,10 +8,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.crypto.URIDereferencer;
 
 import com.whv.jacobOper.constant.Constant;
 import com.whv.jacobOper.utils.FileDeleter;
+import com.whv.jacobOper.utils.FileUtil;
 import com.whv.jacobOper.utils.JacobUtils;
 import com.whv.jacobOper.utils.PDF2Swf;
 
@@ -46,6 +46,7 @@ public class FileManageAction extends HttpServlet {
 			   pdf2Swf.pdf2swf();
 			   String filePath = pdf2Swf.getswfPath();
 			   FileDeleter.getInstance().startTask(pdf2Swf.getOutputPath());
+			   FileUtil.delete(pdfPath);
 			   req.setAttribute("filePath", filePath);
 			RequestDispatcher dispatcher = req.getRequestDispatcher(Constant.getURL("fileManage.show"));
 			dispatcher.forward(req, rep);
@@ -76,6 +77,7 @@ public class FileManageAction extends HttpServlet {
 			   pdf2Swf.pdf2swf();
 			   String filePath = pdf2Swf.getswfPath();
 			   FileDeleter.getInstance().startTask(pdf2Swf.getOutputPath());
+			   FileUtil.delete(pdfPath);
 			   req.setAttribute("filePath", filePath);
 			RequestDispatcher dispatcher = req.getRequestDispatcher(Constant.getURL("fileManage.show"));
 			dispatcher.forward(req, rep);
